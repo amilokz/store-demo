@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Aurelia Luxury Store"
+description = "A premium international e-commerce storefront for discovering considered products, building a cart, and managing orders with a refined luxury shopping experience."
+version = "1.0.0"
+id = "artifacts/aurelia-store"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20474
+
+[services.development]
+run = "pnpm --filter @workspace/aurelia-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aurelia-store", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/aurelia-store/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20474"
+BASE_PATH = "/"
